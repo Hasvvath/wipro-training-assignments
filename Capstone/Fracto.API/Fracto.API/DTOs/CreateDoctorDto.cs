@@ -1,9 +1,9 @@
-﻿namespace Fracto.API.Models
-{
-    public class Doctor
-    {
-        public int DoctorId { get; set; }
+﻿using Microsoft.AspNetCore.Http;
 
+namespace Fracto.API.DTOs
+{
+    public class CreateDoctorDto
+    {
         public string Name { get; set; } = string.Empty;
 
         public string Specialization { get; set; } = string.Empty;
@@ -14,6 +14,6 @@
 
         public string HospitalName { get; set; } = string.Empty;
 
-        public string? ProfileImage { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

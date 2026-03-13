@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1HfuY+547I4=",
+  "dgSpecHash": "wu8yd38hnWY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hasvv\\source\\repos\\Fracto.API\\Fracto.API\\Fracto.API.csproj",
+  "projectFilePath": "C:\\Users\\hasvv\\source\\repos\\wipro-training-assignments-capstone\\Capstone\\Fracto.API\\Fracto.API\\Fracto.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hasvv\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",

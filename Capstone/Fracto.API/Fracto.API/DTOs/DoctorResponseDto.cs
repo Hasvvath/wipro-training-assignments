@@ -1,6 +1,6 @@
-﻿namespace Fracto.API.Models
+﻿namespace Fracto.API.DTOs
 {
-    public class Doctor
+    public class DoctorResponseDto
     {
         public int DoctorId { get; set; }
 
@@ -11,8 +11,6 @@
         public double Rating { get; set; }
 
         public string City { get; set; } = string.Empty;
-
-        public string HospitalName { get; set; } = string.Empty;
 
         public string? ProfileImage { get; set; }
     }
