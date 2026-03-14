@@ -2,6 +2,10 @@
 using Fracto.API.DTOs;
 using Fracto.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Fracto.API.Controllers
 {
@@ -10,10 +14,12 @@ namespace Fracto.API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(ApplicationDbContext context)
+        public AuthController(ApplicationDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("register")]
@@ -55,7 +61,6 @@ namespace Fracto.API.Controllers
             });
         }
 
-
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto login)
         {
@@ -82,10 +87,13 @@ namespace Fracto.API.Controllers
                 });
             }
 
+            var token = GenerateJwtToken(user);
+
             return Ok(new LoginResponseDto
             {
                 Success = true,
                 Message = "Login success",
+                Token = token,
                 User = new UserDto
                 {
                     Id = user.UserId,
@@ -94,6 +102,32 @@ namespace Fracto.API.Controllers
                     Role = user.Role
                 }
             });
+        }
+
+        private string GenerateJwtToken(User user)
+        {
+            var key = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_configuration["Jwt:Key"])
+            );
+
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"],
+                audience: _configuration["Jwt:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

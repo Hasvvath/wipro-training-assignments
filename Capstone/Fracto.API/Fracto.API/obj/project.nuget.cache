@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Om+XHx6mPhU=",
+  "dgSpecHash": "hXCiuaXpWJM=",
   "success": true,
   "projectFilePath": "C:\\Users\\hasvv\\source\\repos\\wipro-training-assignments-capstone\\Capstone\\Fracto.API\\Fracto.API\\Fracto.API.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,7 @@
     "C:\\Users\\hasvv\\.nuget\\packages\\azure.security.keyvault.certificates\\4.6.0\\azure.security.keyvault.certificates.4.6.0.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\azure.security.keyvault.secrets\\4.6.0\\azure.security.keyvault.secrets.4.6.0.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\hasvv\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.4\\microsoft.aspnetcore.authentication.jwtbearer.10.0.4.nupkg.sha512",
+    "C:\\Users\\hasvv\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\10.0.5\\microsoft.aspnetcore.authentication.jwtbearer.10.0.5.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\10.0.4\\microsoft.aspnetcore.authentication.openidconnect.10.0.4.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.4\\microsoft.aspnetcore.openapi.10.0.4.nupkg.sha512",
     "C:\\Users\\hasvv\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
