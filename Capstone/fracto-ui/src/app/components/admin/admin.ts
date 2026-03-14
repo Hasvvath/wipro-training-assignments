@@ -268,7 +268,7 @@ export class AdminComponent implements OnInit {
       return;
     }
 
-    this.appointmentService.updateAppointmentStatus(appointmentId, 'Present').subscribe({
+    this.appointmentService.updateAppointmentStatus(appointmentId, appointment, 'Present').subscribe({
       next: () => {
         this.setMessage('Appointment marked present.', false);
         this.loadAppointments();
@@ -285,7 +285,7 @@ export class AdminComponent implements OnInit {
       return;
     }
 
-    this.appointmentService.updateAppointmentStatus(appointmentId, 'Absent').subscribe({
+    this.appointmentService.updateAppointmentStatus(appointmentId, appointment, 'Absent').subscribe({
       next: () => {
         this.setMessage('Appointment marked absent.', false);
         this.loadAppointments();

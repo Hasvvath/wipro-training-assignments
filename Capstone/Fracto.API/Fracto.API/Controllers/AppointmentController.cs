@@ -137,6 +137,25 @@ namespace Fracto.API.Controllers
                 message = "Appointment deleted successfully"
             });
         }
+        [HttpPut("{id}/status")]
+        public IActionResult UpdateAppointmentStatus(int id, [FromBody] UpdateAppointmentStatusDto dto)
+        {
+            var appointment = _context.Appointments.FirstOrDefault(a => a.AppointmentId == id);
+            if (appointment == null) return NotFound("Appointment not found");
+
+            if (string.IsNullOrWhiteSpace(dto.Status))
+                return BadRequest("Status is required");
+
+            appointment.Status = dto.Status;
+            _context.SaveChanges();
+
+            return Ok(new { success = true, message = "Appointment status updated successfully" });
+        }
+
+
+
+
+
 
     }
 }

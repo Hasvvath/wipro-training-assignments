@@ -2,17 +2,37 @@
   <div class="page-header">
     <p class="section-label">Doctor Directory</p>
     <h2>Search Doctors</h2>
-    <p>Filter doctors by city, view their profile image, and move straight into booking when you find the right match.</p>
+    <p>Filter doctors by city, specialization and rating.</p>
   </div>
 
   <div class="filter-card">
     <label>
-      <span>City</span>
-      <select name="city" [(ngModel)]="selectedCity" (ngModelChange)="onCityChange()">
+      <span><span class="filter-dot"></span>City</span>
+      <select [ngModel]="selectedCity()" (ngModelChange)="onCityChange($event)">
         <option value="">All Cities</option>
         @for (city of cities(); track city) {
           <option [value]="city">{{ city }}</option>
         }
+      </select>
+    </label>
+
+    <label>
+      <span><span class="filter-dot"></span>Specialization</span>
+      <select [ngModel]="selectedSpecialization()" (ngModelChange)="onSpecializationChange($event)">
+        <option value="">All Specializations</option>
+        @for (spec of specializations(); track spec) {
+          <option [value]="spec">{{ spec }}</option>
+        }
+      </select>
+    </label>
+
+    <label>
+      <span><span class="filter-dot"></span>Rating</span>
+      <select [ngModel]="selectedRating()" (ngModelChange)="onRatingChange($event)">
+        <option value="">All Ratings</option>
+        <option value="5">5 stars</option>
+        <option value="4">4 stars and above</option>
+        <option value="3">3 stars and above</option>
       </select>
     </label>
   </div>
@@ -33,13 +53,15 @@
             <div class="doctor-image placeholder">No Image</div>
           }
         </div>
+
         <div>
           <h3>{{ doctorName(doctor) }}</h3>
-          <p><strong>Hospital:</strong> {{ doctor.hospitalName || 'Not provided' }}</p>
-          <p><strong>City:</strong> {{ doctor.city || 'Not provided' }}</p>
-          <p><strong>Specialization:</strong> {{ specialization(doctor) }}</p>
-          <p><strong>Rating:</strong> {{ doctor.rating ?? 'Not rated yet' }}</p>
+          <p><span class="meta-dot"></span><strong>Hospital:</strong> {{ doctor.hospitalName || 'Not provided' }}</p>
+          <p><span class="meta-dot"></span><strong>City:</strong> {{ doctor.city || 'Not provided' }}</p>
+          <p><span class="meta-dot"></span><strong>Specialization:</strong> {{ specialization(doctor) }}</p>
+          <p><span class="meta-dot"></span><strong>Rating:</strong> {{ doctor.rating ?? 'Not rated yet' }}</p>
         </div>
+
         <button type="button" (click)="bookAppointment(doctor.id)">Book Appointment</button>
       </article>
     }

@@ -16,7 +16,7 @@
   <form (ngSubmit)="onSubmit()" #appointmentForm="ngForm">
     <label>
       <span>City</span>
-      <select name="city" [(ngModel)]="selectedCity" (ngModelChange)="onCityChange()">
+      <select name="city" [(ngModel)]="selectedCity" (ngModelChange)="onCityChange($event)">
         <option value="">All Cities</option>
         @for (city of cities(); track city) {
           <option [value]="city">{{ city }}</option>
@@ -28,13 +28,19 @@
       <span>Doctor</span>
       <select name="doctorId" [(ngModel)]="doctorId" (ngModelChange)="onDoctorChange()" required>
         <option value="" disabled>Select a doctor</option>
-        @for (doctor of doctors(); track doctor.id) {
+        @for (doctor of allDoctors(); track doctor.id) {
           <option [value]="doctor.id">
             {{ doctorName(doctor) }}{{ doctor.hospitalName ? ' - ' + doctor.hospitalName : '' }}{{ doctor.city ? ' - ' + doctor.city : '' }}
           </option>
         }
       </select>
     </label>
+
+    @if (selectedCity && isCityDoctorMismatch()) {
+      <p class="status error">City and doctor don't match.</p>
+    } @else if (selectedCity && !filteredDoctors().length && !isLoadingDoctors()) {
+      <p class="status error">No doctors are available in {{ selectedCity }} right now.</p>
+    }
 
     <label>
       <span>Date</span>
@@ -53,6 +59,10 @@
       </select>
     </label>
 
+    @if (date && timeSlot && !isLoadingAppointments() && !isLoadingDoctors() && !isCityDoctorMismatch() && !slotAvailability().some(slot => slot.value === timeSlot)) {
+      <p class="status error">This time slot has already passed for the selected date.</p>
+    }
+
     @if (date && doctorId && !slotAvailability().length) {
       <p class="status error">All slots are full for this doctor on the selected date.</p>
     }
@@ -62,7 +72,7 @@
       <p>Doctors are available until 09:00 PM.</p>
     </div>
 
-    <button type="submit" [disabled]="isSubmitting() || appointmentForm.invalid || isLoadingDoctors() || isLoadingAppointments()">
+    <button type="submit" [disabled]="isSubmitting() || appointmentForm.invalid || isLoadingDoctors() || isLoadingAppointments() || isCityDoctorMismatch() || (date && timeSlot && !slotAvailability().some(slot => slot.value === timeSlot))">
       {{ isSubmitting() ? 'Booking...' : 'Book Appointment' }}
     </button>
   </form>

@@ -12,7 +12,8 @@
   gap: 1rem;
   align-items: center;
   padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.94);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(244, 250, 255, 0.92) 100%);
   border-radius: 24px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -26,6 +27,19 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.brand-dot,
+.account-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 999px;
+  display: inline-block;
+  background: linear-gradient(180deg, #71aef0 0%, #4a90e2 100%);
+  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.12);
 }
 
 .brand-title {
@@ -54,12 +68,28 @@
   color: #35506f;
   background: var(--surface-alt);
   border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .top-nav a.active-link {
   background: var(--primary);
   color: #ffffff;
   border-color: var(--primary);
+  box-shadow: 0 8px 20px rgba(63, 134, 219, 0.25);
+}
+
+.nav-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  display: inline-block;
+  background: #8ab8ef;
+}
+
+.top-nav a.active-link .nav-dot {
+  background: #ffffff;
 }
 
 .account-box {
@@ -69,6 +99,12 @@
   gap: 0.75rem;
   color: #35506f;
   font-weight: 500;
+}
+
+.account-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
 }
 
 .account-box button {

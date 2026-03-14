@@ -176,6 +176,7 @@ C:\Users\hasvv\source\repos\Fracto.API\Fracto.API\bin\Debug\net10.0\Swashbuckle.
 C:\Users\hasvv\source\repos\Fracto.API\Fracto.API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\appsettings.json
+C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\Fracto.API.staticwebassets.runtime.json
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\Fracto.API.staticwebassets.endpoints.json
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\Fracto.API.exe
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\Fracto.API.deps.json
@@ -351,4 +352,3 @@ C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\obj\Debug\net10.0\Fracto.API.pdb
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\obj\Debug\net10.0\Fracto.API.genruntimeconfig.cache
 C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\obj\Debug\net10.0\ref\Fracto.API.dll
-C:\Users\hasvv\source\repos\wipro-training-assignments-capstone\Capstone\Fracto.API\Fracto.API\bin\Debug\net10.0\Fracto.API.staticwebassets.runtime.json

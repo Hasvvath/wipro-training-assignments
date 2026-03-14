@@ -43,8 +43,17 @@ export class AppointmentService {
     });
   }
 
-  updateAppointmentStatus(id: number, status: string): Observable<unknown> {
-    return this.http.put(`${this.apiUrl}/Appointment/${id}`, { status }, {
+  updateAppointmentStatus(id: number, appointment: Appointment, status: string): Observable<unknown> {
+    const payload = {
+      appointmentId: appointment.appointmentId ?? appointment.id ?? id,
+      userId: appointment.userId ?? 0,
+      doctorId: appointment.doctorId ?? 0,
+      appointmentDate: appointment.appointmentDate ?? appointment.date ?? '',
+      timeSlot: appointment.timeSlot ?? '',
+      status
+    };
+
+    return this.http.put(`${this.apiUrl}/Appointment/${id}`, payload, {
       headers: this.createHeaders()
     });
   }

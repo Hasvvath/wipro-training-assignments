@@ -36,7 +36,7 @@ export class AppointmentComponent implements OnInit {
   isLoadingAppointments = signal(true);
   isSubmitting = signal(false);
   messageClass = computed(() => (this.isError() ? 'status error' : 'status success'));
-  readonly minDate = new Date().toISOString().split('T')[0];
+  readonly minDate = this.formatLocalDate(new Date());
   readonly slotOptions: SlotOption[] = [
     { label: '09:00 AM', value: '09:00', capacity: 10 },
     { label: '10:30 AM', value: '10:30', capacity: 20 },
@@ -48,39 +48,6 @@ export class AppointmentComponent implements OnInit {
   readonly cities = computed(() =>
     [...new Set(this.allDoctors().map((doctor) => doctor.city).filter((city): city is string => !!city))].sort()
   );
-  readonly doctors = computed(() => {
-    const city = this.selectedCity.trim().toLowerCase();
-    if (!city) {
-      return this.allDoctors();
-    }
-
-    return this.allDoctors().filter((doctor) => doctor.city?.toLowerCase() === city);
-  });
-  readonly slotAvailability = computed(() => {
-    const selectedDoctorId = Number(this.doctorId);
-    const selectedDate = this.date;
-    const isToday = selectedDate === this.minDate;
-    const currentMinutes = new Date().getHours() * 60 + new Date().getMinutes();
-
-    return this.slotOptions.map((slot) => {
-      const bookedCount = this.appointments().filter((appointment) =>
-        appointment.doctorId === selectedDoctorId &&
-        this.normalizeDate(appointment.appointmentDate || appointment.date) === selectedDate &&
-        appointment.timeSlot === slot.value
-      ).length;
-
-      const [hours, minutes] = slot.value.split(':').map(Number);
-      const slotMinutes = hours * 60 + minutes;
-      const isPastToday = isToday && slotMinutes <= currentMinutes;
-
-      return {
-        ...slot,
-        bookedCount,
-        remaining: Math.max(slot.capacity - bookedCount, 0),
-        isFull: bookedCount >= slot.capacity || isPastToday
-      };
-    }).filter((slot) => !slot.isFull);
-  });
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe((params) => {
@@ -131,6 +98,11 @@ export class AppointmentComponent implements OnInit {
       return;
     }
 
+    if (this.isCityDoctorMismatch()) {
+      this.setMessage("City and doctor don't match.", true);
+      return;
+    }
+
     const currentUser = this.authService.getCurrentUser();
     if (!currentUser?.id) {
       this.setMessage('Please login before booking an appointment.', true);
@@ -140,6 +112,11 @@ export class AppointmentComponent implements OnInit {
     const selectedSlot = this.slotAvailability().find((slot) => slot.value === this.timeSlot);
     if (!selectedSlot) {
       this.setMessage('This slot is no longer available.', true);
+      return;
+    }
+
+    if (this.isPastSlotForSelectedDate(this.timeSlot, this.date)) {
+      this.setMessage('This time slot has already passed for the selected date.', true);
       return;
     }
 
@@ -197,16 +174,70 @@ export class AppointmentComponent implements OnInit {
     return doctor.name || doctor.doctorName || 'Doctor';
   }
 
-  onCityChange(): void {
-    const doctorStillVisible = this.doctors().some((doctor) => String(doctor.id) === this.doctorId);
-    if (!doctorStillVisible) {
-      this.doctorId = '';
+  selectedDoctor(): Doctor | undefined {
+    return this.allDoctors().find((doctor) => String(doctor.id) === this.doctorId);
+  }
+
+  isCityDoctorMismatch(): boolean {
+    const selectedDoctor = this.selectedDoctor();
+    if (!selectedDoctor || !this.selectedCity) {
+      return false;
     }
+
+    return selectedDoctor.city?.trim().toLowerCase() !== this.selectedCity.trim().toLowerCase();
+  }
+
+  filteredDoctors(): Doctor[] {
+    const city = this.selectedCity.trim().toLowerCase();
+    if (!city) {
+      return this.allDoctors();
+    }
+
+    return this.allDoctors().filter((doctor) => doctor.city?.trim().toLowerCase() === city);
+  }
+
+  slotAvailability(): Array<SlotOption & { bookedCount: number; remaining: number; isFull: boolean }> {
+    const selectedDoctorId = Number(this.doctorId);
+    const selectedDate = this.date;
+
+    if (!selectedDoctorId || !selectedDate) {
+      return this.slotOptions.map((slot) => ({
+        ...slot,
+        bookedCount: 0,
+        remaining: slot.capacity,
+        isFull: false
+      }));
+    }
+
+    return this.slotOptions
+      .map((slot) => {
+        const bookedCount = this.appointments().filter((appointment) =>
+          appointment.doctorId === selectedDoctorId &&
+          this.normalizeDate(appointment.appointmentDate || appointment.date) === selectedDate &&
+          appointment.timeSlot === slot.value
+        ).length;
+
+        const isPastToday = this.isPastSlotForSelectedDate(slot.value, selectedDate);
+
+        return {
+          ...slot,
+          bookedCount,
+          remaining: Math.max(slot.capacity - bookedCount, 0),
+          isFull: bookedCount >= slot.capacity || isPastToday
+        };
+      })
+      .filter((slot) => !slot.isFull);
+  }
+
+  onCityChange(city: string): void {
+    this.selectedCity = city;
     this.timeSlot = '';
+    this.message.set('');
   }
 
   onDoctorChange(): void {
     this.timeSlot = '';
+    this.message.set('');
   }
 
   private normalizeDate(date?: string): string {
@@ -218,7 +249,39 @@ export class AppointmentComponent implements OnInit {
       return date.split('T')[0];
     }
 
+    const ddMmYyyy = date.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+    if (ddMmYyyy) {
+      return `${ddMmYyyy[3]}-${ddMmYyyy[2]}-${ddMmYyyy[1]}`;
+    }
+
     return date;
+  }
+
+  private isPastSlotForSelectedDate(slotValue: string, rawDate: string): boolean {
+    const normalizedDate = this.normalizeDate(rawDate);
+    if (!normalizedDate) {
+      return false;
+    }
+
+    const [year, month, day] = normalizedDate.split('-').map(Number);
+    if (!year || !month || !day) {
+      return false;
+    }
+
+    const [hours, minutes] = slotValue.split(':').map(Number);
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) {
+      return false;
+    }
+
+    const scheduledAt = new Date(year, month - 1, day, hours, minutes, 0, 0);
+    return scheduledAt.getTime() <= Date.now();
+  }
+
+  private formatLocalDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 
   private setMessage(message: string, isError: boolean): void {

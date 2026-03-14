@@ -1,17 +1,17 @@
 :root {
   color-scheme: light;
   font-family: Arial, Helvetica, sans-serif;
-  --page-bg: #f4f9ff;
-  --page-bg-soft: #edf5ff;
+  --page-bg: #eef5ff;
+  --page-bg-soft: #e6effd;
   --surface: #ffffff;
-  --surface-alt: #f7fbff;
+  --surface-alt: #f2f8ff;
   --text: #10233f;
   --muted: #59708f;
-  --primary: #4a90e2;
-  --primary-dark: #2f6fbe;
-  --border: #d7e4f4;
+  --primary: #3f86db;
+  --primary-dark: #2e67b8;
+  --border: #cfe0f2;
   --shadow: 0 18px 40px rgba(41, 84, 138, 0.08);
-  background: linear-gradient(180deg, #f8fbff 0%, #eef5ff 100%);
+  background: linear-gradient(180deg, #f7fbff 0%, #e9f1fe 100%);
   color: var(--text);
 }
 
@@ -23,8 +23,9 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top left, #ffffff 0%, transparent 35%),
-    linear-gradient(135deg, #f6fbff 0%, #edf5ff 52%, #e8f1ff 100%);
+    radial-gradient(circle at 8% 10%, #ffffff 0%, transparent 26%),
+    radial-gradient(circle at 90% 12%, #f3f8ff 0%, transparent 33%),
+    linear-gradient(145deg, #f7fbff 0%, #ecf4ff 58%, #e4eeff 100%);
 }
 
 button,

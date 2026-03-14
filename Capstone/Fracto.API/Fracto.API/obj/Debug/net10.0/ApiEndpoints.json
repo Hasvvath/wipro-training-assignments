@@ -48,6 +48,27 @@
   },
   {
     "ContainingType": "Fracto.API.Controllers.AppointmentController",
+    "Method": "UpdateAppointmentStatus",
+    "RelativePath": "api/Appointment/{id}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "Fracto.API.DTOs.UpdateAppointmentStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Fracto.API.Controllers.AppointmentController",
     "Method": "BookDoctorAppointment",
     "RelativePath": "api/Appointment/book",
     "HttpMethod": "POST",
