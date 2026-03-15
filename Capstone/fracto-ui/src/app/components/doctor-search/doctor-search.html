@@ -7,7 +7,7 @@
 
   <div class="filter-card">
     <label>
-      <span><span class="filter-dot"></span>City</span>
+      <span>City</span>
       <select [ngModel]="selectedCity()" (ngModelChange)="onCityChange($event)">
         <option value="">All Cities</option>
         @for (city of cities(); track city) {
@@ -17,7 +17,7 @@
     </label>
 
     <label>
-      <span><span class="filter-dot"></span>Specialization</span>
+      <span>Specialization</span>
       <select [ngModel]="selectedSpecialization()" (ngModelChange)="onSpecializationChange($event)">
         <option value="">All Specializations</option>
         @for (spec of specializations(); track spec) {
@@ -27,7 +27,7 @@
     </label>
 
     <label>
-      <span><span class="filter-dot"></span>Rating</span>
+      <span>Rating</span>
       <select [ngModel]="selectedRating()" (ngModelChange)="onRatingChange($event)">
         <option value="">All Ratings</option>
         <option value="5">5 stars</option>
@@ -56,10 +56,10 @@
 
         <div>
           <h3>{{ doctorName(doctor) }}</h3>
-          <p><span class="meta-dot"></span><strong>Hospital:</strong> {{ doctor.hospitalName || 'Not provided' }}</p>
-          <p><span class="meta-dot"></span><strong>City:</strong> {{ doctor.city || 'Not provided' }}</p>
-          <p><span class="meta-dot"></span><strong>Specialization:</strong> {{ specialization(doctor) }}</p>
-          <p><span class="meta-dot"></span><strong>Rating:</strong> {{ doctor.rating ?? 'Not rated yet' }}</p>
+          <p><strong>Hospital:</strong> {{ doctor.hospitalName || 'Not provided' }}</p>
+          <p><strong>City:</strong> {{ doctor.city || 'Not provided' }}</p>
+          <p><strong>Specialization:</strong> {{ specialization(doctor) }}</p>
+          <p><strong>Rating:</strong> {{ doctor.rating ?? 'Not rated yet' }}</p>
         </div>
 
         <button type="button" (click)="bookAppointment(doctor.id)">Book Appointment</button>

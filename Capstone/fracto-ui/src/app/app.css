@@ -20,28 +20,6 @@
   backdrop-filter: blur(10px);
 }
 
-.brand-kicker {
-  margin: 0 0 0.3rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--primary-dark);
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.brand-dot,
-.account-dot {
-  width: 0.65rem;
-  height: 0.65rem;
-  border-radius: 999px;
-  display: inline-block;
-  background: linear-gradient(180deg, #71aef0 0%, #4a90e2 100%);
-  box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.12);
-}
-
 .brand-title {
   color: var(--text);
   text-decoration: none;
@@ -68,9 +46,6 @@
   color: #35506f;
   background: var(--surface-alt);
   border: 1px solid var(--border);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
 }
 
 .top-nav a.active-link {
@@ -80,18 +55,6 @@
   box-shadow: 0 8px 20px rgba(63, 134, 219, 0.25);
 }
 
-.nav-dot {
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 999px;
-  display: inline-block;
-  background: #8ab8ef;
-}
-
-.top-nav a.active-link .nav-dot {
-  background: #ffffff;
-}
-
 .account-box {
   display: flex;
   align-items: center;
@@ -99,12 +62,6 @@
   gap: 0.75rem;
   color: #35506f;
   font-weight: 500;
-}
-
-.account-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
 }
 
 .account-box button {

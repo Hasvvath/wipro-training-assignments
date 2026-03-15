@@ -57,17 +57,6 @@
 .filter-card span {
   font-weight: 600;
   color: #29405c;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.filter-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  display: inline-block;
-  background: #79abe8;
 }
 
 .filter-card select {
@@ -128,15 +117,6 @@
 .doctor-card p {
   margin: 0.45rem 0;
   color: var(--muted);
-}
-
-.meta-dot {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 999px;
-  display: inline-block;
-  background: #97c0f0;
-  margin-right: 0.45rem;
 }
 
 button {

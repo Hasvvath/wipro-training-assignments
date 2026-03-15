@@ -1,29 +1,28 @@
 <div class="app-shell">
   <header class="site-header">
     <div>
-      <p class="brand-kicker"><span class="brand-dot"></span>Fracto Care</p>
       <a routerLink="/" class="brand-title">Fracto Doctor Appointment System</a>
     </div>
 
     <nav class="top-nav">
       @if (!isLoggedIn()) {
-        <a routerLink="/login" routerLinkActive="active-link"><span class="nav-dot"></span>Login</a>
-        <a routerLink="/register" routerLinkActive="active-link"><span class="nav-dot"></span>Register</a>
+        <a routerLink="/login" routerLinkActive="active-link">Login</a>
+        <a routerLink="/register" routerLinkActive="active-link">Register</a>
       }
       @if (isAdmin()) {
-        <a routerLink="/admin" routerLinkActive="active-link"><span class="nav-dot"></span>Admin</a>
+        <a routerLink="/admin" routerLinkActive="active-link">Admin</a>
       }
-      <a routerLink="/search" routerLinkActive="active-link"><span class="nav-dot"></span>Search Doctors</a>
-      <a routerLink="/appointment" routerLinkActive="active-link"><span class="nav-dot"></span>Book Appointment</a>
-      <a routerLink="/appointments" routerLinkActive="active-link"><span class="nav-dot"></span>Appointment List</a>
+      <a routerLink="/search" routerLinkActive="active-link">Search Doctors</a>
+      <a routerLink="/appointment" routerLinkActive="active-link">Book Appointment</a>
+      <a routerLink="/appointments" routerLinkActive="active-link">Appointment List</a>
     </nav>
 
     <div class="account-box">
       @if (isLoggedIn()) {
-        <span class="account-label"><span class="account-dot"></span>Welcome {{ userName }}</span>
+        <span class="account-label">Welcome {{ userName }}</span>
         <button type="button" (click)="logout()">Logout</button>
       } @else {
-        <span class="account-label"><span class="account-dot"></span>Welcome</span>
+        <span class="account-label">Welcome</span>
       }
     </div>
   </header>
