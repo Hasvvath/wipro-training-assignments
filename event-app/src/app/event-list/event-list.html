@@ -1,0 +1,17 @@
+<h2>Event List</h2>
+
+<table border="1" cellpadding="10">
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Price</th>
+    <th>Category</th>
+  </tr>
+
+  <tr *ngFor="let event of events" [@fadeIn] [appHighlight]="event.price">
+    <td>{{ event.name }}</td>
+    <td>{{ event.date }}</td>
+    <td>{{ event.price | priceFormat }}</td>
+    <td>{{ event.category }}</td>
+  </tr>
+</table>
