@@ -3,6 +3,27 @@
   gap: 1.5rem;
 }
 
+.section-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.section-tabs button {
+  background: #e8f1fb;
+  color: #27476a;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+}
+
+.section-tabs button.active-tab {
+  background: var(--primary);
+  color: #ffffff;
+  border-color: var(--primary);
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -270,6 +291,10 @@ th {
 }
 
 @media (max-width: 900px) {
+  .section-tabs {
+    flex-direction: column;
+  }
+
   .stats-grid,
   .admin-grid,
   .users-grid {

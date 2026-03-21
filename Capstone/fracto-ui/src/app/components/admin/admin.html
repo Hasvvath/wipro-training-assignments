@@ -41,31 +41,42 @@
       </div>
     </div>
 
-    <section class="stats-grid">
-      <article class="stat-card">
-        <p class="stat-title">Total Users</p>
-        <h3>{{ totalUsers() }}</h3>
-        <p>Registered user accounts</p>
-      </article>
-      <article class="stat-card">
-        <p class="stat-title">Total Appointments</p>
-        <h3>{{ totalAppointments() }}</h3>
-        <p>All appointment records</p>
-      </article>
-      <article class="stat-card">
-        <p class="stat-title">Booked Now</p>
-        <h3>{{ bookedAppointments() }}</h3>
-        <p>Appointments in booked status</p>
-      </article>
-      <article class="stat-card">
-        <p class="stat-title">Today</p>
-        <h3>{{ todayAppointments() }}</h3>
-        <p>Appointments scheduled today</p>
-      </article>
+    <section class="page-card section-tabs">
+      <button type="button" [class.active-tab]="activeSection() === 'overview'" (click)="setSection('overview')">Overview</button>
+      <button type="button" [class.active-tab]="activeSection() === 'doctor-setup'" (click)="setSection('doctor-setup')">Doctor Setup</button>
+      <button type="button" [class.active-tab]="activeSection() === 'doctors'" (click)="setSection('doctors')">Doctors</button>
+      <button type="button" [class.active-tab]="activeSection() === 'users'" (click)="setSection('users')">Users</button>
+      <button type="button" [class.active-tab]="activeSection() === 'appointments'" (click)="setSection('appointments')">Appointments</button>
     </section>
 
-    <div class="admin-grid">
-      <section class="page-card form-card">
+    @if (activeSection() === 'overview') {
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p class="stat-title">Total Users</p>
+          <h3>{{ totalUsers() }}</h3>
+          <p>Registered user accounts</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-title">Total Appointments</p>
+          <h3>{{ totalAppointments() }}</h3>
+          <p>All appointment records</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-title">Booked Now</p>
+          <h3>{{ bookedAppointments() }}</h3>
+          <p>Appointments in booked status</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-title">Today</p>
+          <h3>{{ todayAppointments() }}</h3>
+          <p>Appointments scheduled today</p>
+        </article>
+      </section>
+    }
+
+    @if (activeSection() === 'doctor-setup') {
+      <div class="admin-grid">
+        <section class="page-card form-card">
         <div class="panel-head">
           <div>
             <p class="section-label">Doctor Setup</p>
@@ -119,20 +130,22 @@
             {{ submitLabel() }}
           </button>
         </form>
-      </section>
+        </section>
 
-      <section class="page-card slot-card">
-        <p class="section-label">Daily Slot Policy</p>
-        <h3>Standard Appointment Slots</h3>
-        <ul>
-          @for (slot of slotRules; track slot) {
-            <li>{{ slot }}</li>
-          }
-        </ul>
-      </section>
-    </div>
+        <section class="page-card slot-card">
+          <p class="section-label">Daily Slot Policy</p>
+          <h3>Standard Appointment Slots</h3>
+          <ul>
+            @for (slot of slotRules; track slot) {
+              <li>{{ slot }}</li>
+            }
+          </ul>
+        </section>
+      </div>
+    }
 
-    <section class="page-card">
+    @if (activeSection() === 'doctors') {
+      <section class="page-card">
       <div class="panel-head">
         <div>
           <p class="section-label">Doctor Records</p>
@@ -167,9 +180,11 @@
           </article>
         }
       </div>
-    </section>
+      </section>
+    }
 
-    <section class="page-card">
+    @if (activeSection() === 'users') {
+      <section class="page-card">
       <div class="panel-head">
         <div>
           <p class="section-label">Registered Users</p>
@@ -206,9 +221,11 @@
           </tbody>
         </table>
       </div>
-    </section>
+      </section>
+    }
 
-    <section class="page-card">
+    @if (activeSection() === 'appointments') {
+      <section class="page-card">
       <div class="panel-head">
         <div>
           <p class="section-label">Booking Overview</p>
@@ -257,7 +274,8 @@
           </tbody>
         </table>
       </div>
-    </section>
+      </section>
+    }
   }
 
   @if (message()) {

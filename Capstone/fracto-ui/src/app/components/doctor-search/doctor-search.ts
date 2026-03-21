@@ -21,6 +21,8 @@ export class DoctorSearchComponent implements OnInit {
   selectedCity = signal('');
   selectedSpecialization = signal('');
   selectedRating = signal('');
+  selectedExperience = signal('');
+  doctorNameQuery = signal('');
 
   message = signal('');
   isLoading = signal(true);
@@ -50,13 +52,23 @@ export class DoctorSearchComponent implements OnInit {
     const city = this.selectedCity().trim().toLowerCase();
     const spec = this.selectedSpecialization().trim().toLowerCase();
     const rating = Number(this.selectedRating() || 0);
+    const experienceRange = this.selectedExperience();
+    const query = this.doctorNameQuery().trim().toLowerCase();
 
     return this.allDoctors().filter((doctor) => {
       const cityMatch = !city || doctor.city?.trim().toLowerCase() === city;
       const specMatch = !spec || (doctor.specialization || doctor.speciality)?.trim().toLowerCase() === spec;
       const ratingMatch = !rating || (doctor.rating ?? 0) >= rating;
+      const years = Number(doctor.experience ?? 0);
+      const experienceMatch =
+        !experienceRange ||
+        (experienceRange === '0-1' && years >= 0 && years <= 1) ||
+        (experienceRange === '1-5' && years > 1 && years <= 5) ||
+        (experienceRange === '5-10' && years > 5 && years <= 10) ||
+        (experienceRange === '10-plus' && years > 10);
+      const nameMatch = !query || this.doctorName(doctor).toLowerCase().includes(query);
 
-      return cityMatch && specMatch && ratingMatch;
+      return cityMatch && specMatch && ratingMatch && experienceMatch && nameMatch;
     });
   });
 
@@ -106,6 +118,16 @@ export class DoctorSearchComponent implements OnInit {
 
   onRatingChange(rating: string): void {
     this.selectedRating.set(rating);
+    this.updateMessage();
+  }
+
+  onExperienceChange(experience: string): void {
+    this.selectedExperience.set(experience);
+    this.updateMessage();
+  }
+
+  onDoctorNameQueryChange(query: string): void {
+    this.doctorNameQuery.set(query);
     this.updateMessage();
   }
 

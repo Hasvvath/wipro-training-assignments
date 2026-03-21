@@ -45,6 +45,7 @@ export class AdminComponent implements OnInit {
   isLoadingDoctors = signal(false);
   isLoadingUsers = signal(false);
   isLoadingAppointments = signal(false);
+  activeSection = signal<'overview' | 'doctor-setup' | 'doctors' | 'users' | 'appointments'>('overview');
 
   readonly isAdmin = computed(() => this.authService.isAdmin());
   readonly currentUser = this.authService.currentUser;
@@ -121,6 +122,10 @@ export class AdminComponent implements OnInit {
     this.loadDoctors();
     this.loadUsers();
     this.loadAppointments();
+  }
+
+  setSection(section: 'overview' | 'doctor-setup' | 'doctors' | 'users' | 'appointments'): void {
+    this.activeSection.set(section);
   }
 
   loadDoctors(): void {
