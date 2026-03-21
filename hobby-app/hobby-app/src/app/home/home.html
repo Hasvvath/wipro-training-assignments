@@ -1,6 +1,7 @@
 <app-myhobbies 
   *ngIf="selectedMenu === 'my'"
   [hobbies]="hobbies"
+  (updateHobby)="updateHobby.emit($event)"
   (deleteHobby)="deleteHobby.emit($event)">
 </app-myhobbies>
 

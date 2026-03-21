@@ -12,6 +12,24 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
+## Run With json-server (Local CRUD)
+
+This app now uses `json-server` for local CRUD operations.
+
+1. Start mock API on `http://localhost:3000`:
+
+```bash
+npm run start:api
+```
+
+2. In a second terminal, start Angular app on `http://localhost:4200`:
+
+```bash
+npm start
+```
+
+Data is stored in `db.json` at the project root.
+
 ## Code scaffolding
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:

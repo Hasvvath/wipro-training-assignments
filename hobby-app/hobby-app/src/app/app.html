@@ -1,8 +1,11 @@
 <app-menu (menuClick)="onMenuChange($event)"></app-menu>
 
+<p *ngIf="errorMessage">{{ errorMessage }}</p>
+
 <app-home 
   [selectedMenu]="selectedMenu"
   [hobbies]="hobbies"
   (addHobby)="addHobby($event)"
+  (updateHobby)="updateHobby($event)"
   (deleteHobby)="deleteHobby($event)">
 </app-home>

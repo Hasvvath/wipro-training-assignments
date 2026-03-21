@@ -1,6 +1,18 @@
 <ul>
-  <li *ngFor="let hobby of hobbies; let i = index">
-    {{ hobby }}
-    <button (click)="deleteHobby.emit(i)">Delete</button>
+  <li *ngFor="let hobby of hobbies">
+    <ng-container *ngIf="editingId !== hobby.id; else editMode">
+      {{ hobby.name }}
+      <button (click)="toggleFavorite(hobby)">
+        {{ hobby.favorite ? 'Unfavorite' : 'Favorite' }}
+      </button>
+      <button (click)="startEdit(hobby)">Edit</button>
+      <button (click)="deleteHobby.emit(hobby.id)">Delete</button>
+    </ng-container>
+
+    <ng-template #editMode>
+      <input [(ngModel)]="editName" />
+      <button (click)="saveEdit(hobby)">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </ng-template>
   </li>
 </ul>

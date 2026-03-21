@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Hobby } from '../hobby.model';
 
 @Component({
   selector: 'app-favhobby',
@@ -8,5 +9,9 @@ import { CommonModule } from '@angular/common';
   templateUrl: './favhobby.html'
 })
 export class FavHobbyComponent {
-  @Input() hobbies!: string[];
+  @Input() hobbies!: Hobby[];
+
+  get favoriteHobbies(): Hobby[] {
+    return this.hobbies.filter((hobby) => hobby.favorite);
+  }
 }

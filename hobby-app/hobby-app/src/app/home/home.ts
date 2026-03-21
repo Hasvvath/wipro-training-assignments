@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MyHobbiesComponent } from '../myhobbies/myhobbies';
 import { NewHobbyComponent } from '../newhobby/newhobby';
 import { FavHobbyComponent } from '../favhobby/favhobby';
+import { Hobby } from '../hobby.model';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +18,9 @@ import { FavHobbyComponent } from '../favhobby/favhobby';
 })
 export class HomeComponent {
   @Input() selectedMenu!: string;
-  @Input() hobbies!: string[];
+  @Input() hobbies!: Hobby[];
 
   @Output() addHobby = new EventEmitter<string>();
+  @Output() updateHobby = new EventEmitter<Hobby>();
   @Output() deleteHobby = new EventEmitter<number>();
 }

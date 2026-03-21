@@ -1,18 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Hobby } from '../hobby.model';
 
-import { Favhobby } from './favhobby';
+import { FavHobbyComponent } from './favhobby';
 
-describe('Favhobby', () => {
-  let component: Favhobby;
-  let fixture: ComponentFixture<Favhobby>;
+describe('FavHobbyComponent', () => {
+  let component: FavHobbyComponent;
+  let fixture: ComponentFixture<FavHobbyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Favhobby],
+      imports: [FavHobbyComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Favhobby);
+    fixture = TestBed.createComponent(FavHobbyComponent);
     component = fixture.componentInstance;
+    const hobbies: Hobby[] = [{ id: 1, name: 'Cricket', favorite: true }];
+    fixture.componentRef.setInput('hobbies', hobbies);
     await fixture.whenStable();
   });
 
