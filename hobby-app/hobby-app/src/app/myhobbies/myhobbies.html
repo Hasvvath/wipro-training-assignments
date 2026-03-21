@@ -1,0 +1,6 @@
+<ul>
+  <li *ngFor="let hobby of hobbies; let i = index">
+    {{ hobby }}
+    <button (click)="deleteHobby.emit(i)">Delete</button>
+  </li>
+</ul>

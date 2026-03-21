@@ -1,0 +1,15 @@
+<app-myhobbies 
+  *ngIf="selectedMenu === 'my'"
+  [hobbies]="hobbies"
+  (deleteHobby)="deleteHobby.emit($event)">
+</app-myhobbies>
+
+<app-newhobby 
+  *ngIf="selectedMenu === 'add'"
+  (addHobby)="addHobby.emit($event)">
+</app-newhobby>
+
+<app-favhobby 
+  *ngIf="selectedMenu === 'fav'"
+  [hobbies]="hobbies">
+</app-favhobby>

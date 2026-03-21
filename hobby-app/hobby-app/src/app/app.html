@@ -1,0 +1,8 @@
+<app-menu (menuClick)="onMenuChange($event)"></app-menu>
+
+<app-home 
+  [selectedMenu]="selectedMenu"
+  [hobbies]="hobbies"
+  (addHobby)="addHobby($event)"
+  (deleteHobby)="deleteHobby($event)">
+</app-home>
